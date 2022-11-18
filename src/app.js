@@ -1,16 +1,10 @@
 const express = require('express');
-const erro = require('./middlewares/error');
-const routeLogin = require('./routes/routerLogin');
 
 // ...
 
 const app = express();
 
 app.use(express.json());
-
-app.use('/login', routeLogin);
-
-app.use(erro);
 
 // ...
 
