@@ -8,6 +8,8 @@ const routerCategory = require('./routers/categorie.router');
 
 const postUserRouter = require('./routers/user.router');
 
+const postCategoryRouter = require('./routers/post.category.router');
+
 // ...
 
 const app = express();
@@ -19,6 +21,8 @@ app.use('/login', loginRouter);
 app.use('/user', postUserRouter);
 
 app.use('/categories', routerCategory);
+
+app.use('/post', postCategoryRouter);
 
 app.use(errorMid);
 

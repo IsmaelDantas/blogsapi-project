@@ -6,7 +6,7 @@ const loginValidation = async (email, password) => {
   if (user === null || user.password !== password) {
     return { type: 'erro', message: 'Invalid fields' };
   }
-  const token = jwtToken.tokenCreate(email);
+  const token = jwtToken.tokenCreate(email, user.id);
   return token;
 };
 
