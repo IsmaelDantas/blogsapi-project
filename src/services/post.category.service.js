@@ -20,7 +20,10 @@ const getServicePosts = async () => {
 
 const getByIdServicePosts = async (id) => {
     const byIdPosts = await BlogPost.findByPk(id, {
-      attributes: { exclude: 'password' },
+        include: [
+            { model: User, as: 'user', attributes: { exclude: ['password'] } },
+            { model: Category, as: 'categories', through: { attributes: [] } },
+        ],
     });
     if (!byIdPosts) {
       return { type: 'error', message: 'Post does not exist' };

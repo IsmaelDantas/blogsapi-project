@@ -17,7 +17,8 @@ const postsGet = async (_req, res) => {
 };
 
 const getByIdPost = async (req, res) => {
-  const byIdPost = await getByIdServicePosts();
+  const { id } = req.params;
+  const byIdPost = await getByIdServicePosts(id);
   if (byIdPost.type) {
     return res.status(404).json({ message: byIdPost.message });
   } 
