@@ -9,14 +9,23 @@ const newServicePost = async (id, { title, content, categoryIds }) => {
 };
 
 const getServicePosts = async () => {
-  const posts = await BlogPost.findAll({
+  const post = await BlogPost.findAll({
     include: [
       { model: User, as: 'user', attributes: { exclude: ['password'] } },
       { model: Category, as: 'categories', through: { attributes: [] } },
     ],
   });
-
-  return posts;
+  return post;
 };
 
-module.exports = { newServicePost, getServicePosts };
+const getByIdServicePosts = async (id) => {
+    const byIdPosts = await BlogPost.findByPk(id, {
+      attributes: { exclude: 'password' },
+    });
+    if (!byIdPosts) {
+      return { type: 'error', message: 'Post does not exist' };
+    }
+    return byIdPosts;
+  };
+
+module.exports = { newServicePost, getServicePosts, getByIdServicePosts };

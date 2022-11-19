@@ -9,4 +9,6 @@ postRouter.get('/', validationToken, controllerPost.postsGet);
 
 postRouter.post('/', validationToken, validationPosts, validationCategory, controllerPost.postsNew);
 
+postRouter.get('/:id', validationToken, controllerPost.getByIdPost);
+
 module.exports = postRouter;
