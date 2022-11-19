@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const { BlogPost, PostCategory, User, Category } = require('../models');
 
 const newServicePost = async (id, { title, content, categoryIds }) => {
@@ -57,6 +58,27 @@ const getByIdServicePosts = async (id) => {
     if (postGet.userId !== userId) { return { status: 401, message: 'Unauthorized user' }; }
     return { status: 204, message: null };
   };
+
+  const getAllOfIt = async (search, titleAndContent) => {
+    const post = await BlogPost.findAll({
+        where: {
+            [titleAndContent]: {
+            [Op.like]: `%${search}%`,
+            },
+         },
+         attributes: { exclude: ['user_id'] },
+         include: [{ model: User, as: 'user', attributes: { exclude: ['password'] } },
+         { model: Category, as: 'categories', through: { attributes: [] } }],
+    });
+    return post;
+};
+
+const postSearch = async (search) => {
+        const result = await getAllOfIt(search, 'title');
+        const result2 = await getAllOfIt(search, 'content');
+    if (result.length !== 0) return { type: null, message: result };
+    return { type: null, message: result2 };
+};
   
 module.exports = { 
   newServicePost, 
@@ -64,4 +86,5 @@ module.exports = {
   getByIdServicePosts, 
   postServiceUpdate, 
   postDelete,
+  postSearch,
 };

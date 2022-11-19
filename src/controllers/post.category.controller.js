@@ -4,6 +4,7 @@ const {
   getByIdServicePosts,
   postServiceUpdate,
   postDelete,
+  postSearch,
  } = require('../services/post.category.service');
 
 const postsNew = async (req, res) => {
@@ -48,10 +49,17 @@ const postRemove = async (req, res) => {
   return res.status(remover.status).json({ message: remover.message });
 };
 
+const searchPost = async (req, res) => {
+  const { q } = req.query;
+  const { message } = await postSearch(q);
+  return res.status(200).json(message);
+};
+
 module.exports = { 
   postsNew, 
   postsGet, 
   getByIdPost, 
   updatePost, 
   postRemove,
+  searchPost,
 };
