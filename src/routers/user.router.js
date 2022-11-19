@@ -11,4 +11,6 @@ validationEmail, validationPassword, postUserController.postUser);
 
 postUserRouter.get('/', validationToken, postUserController.getUsers);
 
+postUserRouter.get('/:id', validationToken, postUserController.getByIdUser);
+
 module.exports = postUserRouter;
