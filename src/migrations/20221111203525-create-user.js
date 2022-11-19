@@ -9,12 +9,16 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
       },
+
       display_name: Sequelize.STRING,
+
       email: {
         type: Sequelize.STRING,
         unique: true,
       },
+
       password: Sequelize.STRING,
+      
       image: Sequelize.STRING,
     })
   },

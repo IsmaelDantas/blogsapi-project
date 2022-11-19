@@ -4,6 +4,8 @@ const errorMid = require('./middleware/error');
 
 const loginRouter = require('./routers/login.router');
 
+const routerCategory = require('./routers/categorie.router');
+
 const postUserRouter = require('./routers/user.router');
 
 // ...
@@ -15,6 +17,8 @@ app.use(express.json());
 app.use('/login', loginRouter);
 
 app.use('/user', postUserRouter);
+
+app.use('/categories', routerCategory);
 
 app.use(errorMid);
 

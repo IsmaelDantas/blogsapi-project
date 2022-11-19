@@ -16,8 +16,8 @@ const getServiceUsers = async () => {
   return users;
 };
 
-const getByIdUserService = async (id) => {
-  const user = await User.findByPk(id, {
+const getByIdUserService = (id) => {
+  const user = User.findByPk(id, {
     attributes: { exclude: 'password' },
   });
   return user;
