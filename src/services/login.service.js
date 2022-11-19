@@ -1,4 +1,4 @@
-const { User } = require('../models/User');
+const { User } = require('../models');
 const jwtToken = require('../util/jwt');
 
 const loginValidation = async (email, password) => {
