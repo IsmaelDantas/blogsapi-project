@@ -1,14 +1,17 @@
 const express = require('express');
 const controllerPost = require('../controllers/post.category.controller');
-const { validationPosts, validationCategory } = require('../middleware/validationPost');
+const { validationPosts,
+     validationCategory, validationBody } = require('../middleware/validationPost');
 const { validationToken } = require('../middleware/validationToken');
 
-const postRouter = express.Router();
+const routerPost = express.Router();
 
-postRouter.get('/', validationToken, controllerPost.postsGet);
+routerPost.get('/', validationToken, controllerPost.postsGet);
 
-postRouter.post('/', validationToken, validationPosts, validationCategory, controllerPost.postsNew);
+routerPost.post('/', validationToken, validationPosts, validationCategory, controllerPost.postsNew);
 
-postRouter.get('/:id', validationToken, controllerPost.getByIdPost);
+routerPost.get('/:id', validationToken, controllerPost.getByIdPost);
 
-module.exports = postRouter;
+routerPost.put('/:id', validationBody, validationToken, controllerPost.updatePost);
+
+module.exports = routerPost;

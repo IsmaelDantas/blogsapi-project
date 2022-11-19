@@ -1,6 +1,7 @@
 const { newServicePost,
   getServicePosts,
-  getByIdServicePosts } = require('../services/post.category.service');
+  getByIdServicePosts,
+  postServiceUpdate } = require('../services/post.category.service');
 
 const postsNew = async (req, res) => {
   const data = req.body;
@@ -25,4 +26,16 @@ const getByIdPost = async (req, res) => {
   return res.status(200).json(byIdPost);
 };
 
-module.exports = { postsNew, postsGet, getByIdPost };
+const updatePost = async (req, res) => {
+  const { id } = req.params;
+  const data = req.body;
+  const { id: userId } = req.user;
+  const up = await postServiceUpdate(id, data, userId);
+  const postUpdated = await getByIdServicePosts(id);
+  if (up.type) {
+    return res.status(401).json({ message: up.message });
+  }
+  return res.status(200).json(postUpdated);
+};
+
+module.exports = { postsNew, postsGet, getByIdPost, updatePost };
