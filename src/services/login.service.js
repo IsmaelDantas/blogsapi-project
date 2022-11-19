@@ -10,6 +10,12 @@ const loginValidation = async (email, password) => {
   return token;
 };
 
+const getServiceUser = async () => {
+  const users = await User.findAll({ attributes: { exclude: 'password' } });
+  return users;
+};
+
 module.exports = {
   loginValidation,
+  getServiceUser,
 };
