@@ -51,4 +51,17 @@ const getByIdServicePosts = async (id) => {
     return { type: 'error', message: 'Unauthorized user' };
   };
 
-module.exports = { newServicePost, getServicePosts, getByIdServicePosts, postServiceUpdate };
+  const postDelete = async (id, userId) => {
+    const postGet = await getByIdServicePosts(id);
+    if (postGet.type) { return { status: 404, message: 'Post does not exist' }; }
+    if (postGet.userId !== userId) { return { status: 401, message: 'Unauthorized user' }; }
+    return { status: 204, message: null };
+  };
+  
+module.exports = { 
+  newServicePost, 
+  getServicePosts, 
+  getByIdServicePosts, 
+  postServiceUpdate, 
+  postDelete,
+};

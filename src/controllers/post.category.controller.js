@@ -1,7 +1,10 @@
-const { newServicePost,
+const { 
+  newServicePost,
   getServicePosts,
   getByIdServicePosts,
-  postServiceUpdate } = require('../services/post.category.service');
+  postServiceUpdate,
+  postDelete,
+ } = require('../services/post.category.service');
 
 const postsNew = async (req, res) => {
   const data = req.body;
@@ -38,4 +41,17 @@ const updatePost = async (req, res) => {
   return res.status(200).json(postUpdated);
 };
 
-module.exports = { postsNew, postsGet, getByIdPost, updatePost };
+const postRemove = async (req, res) => {
+  const { id } = req.params;
+  const { id: userId } = req.user;
+  const remover = await postDelete(id, userId);
+  return res.status(remover.status).json({ message: remover.message });
+};
+
+module.exports = { 
+  postsNew, 
+  postsGet, 
+  getByIdPost, 
+  updatePost, 
+  postRemove,
+};
