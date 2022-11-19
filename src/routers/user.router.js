@@ -13,4 +13,6 @@ postUserRouter.get('/', validationToken, postUserController.getUsers);
 
 postUserRouter.get('/:id', validationToken, postUserController.getByIdUser);
 
+postUserRouter.delete('/me', validationToken, postUserController.deleteUserMe);
+
 module.exports = postUserRouter;

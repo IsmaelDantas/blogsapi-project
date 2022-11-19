@@ -1,4 +1,9 @@
-const { userService, getServiceUsers, getByIdUserService } = require('../services/user.service');
+const { 
+  userService,
+  getServiceUsers,
+  getByIdUserService,
+  deleteMeUser,
+} = require('../services/user.service');
 
 const postUser = async (req, res) => {
   const data = req.body;
@@ -23,4 +28,15 @@ const getByIdUser = async (req, res) => {
   return res.status(200).json(user);
 };
 
-module.exports = { postUser, getUsers, getByIdUser };
+const deleteUserMe = async (req, res) => {
+  const { id } = req.user;
+  await deleteMeUser(id);
+  return res.status(204).json(); 
+};
+
+module.exports = { 
+  postUser, 
+  getUsers, 
+  getByIdUser, 
+  deleteUserMe,
+};
