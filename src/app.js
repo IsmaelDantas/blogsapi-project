@@ -4,6 +4,8 @@ const errorMid = require('./middleware/error');
 
 const loginRouter = require('./routers/login.router');
 
+const postUserRouter = require('./routers/user.router');
+
 // ...
 
 const app = express();
@@ -11,6 +13,8 @@ const app = express();
 app.use(express.json());
 
 app.use('/login', loginRouter);
+
+app.use('/user', postUserRouter);
 
 app.use(errorMid);
 

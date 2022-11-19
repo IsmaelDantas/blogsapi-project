@@ -3,9 +3,9 @@ const validationLogin = async (req, res, next) => {
     if (!email || !password || email.length === 0 || password.length === 0) {
         return res.status(400).json({ message: 'Some required fields are missing' });
       }
-    return next();
-  };
-  
-  module.exports = {
+      return next();
+    };
+
+module.exports = {
     validationLogin,
-  };
+};
